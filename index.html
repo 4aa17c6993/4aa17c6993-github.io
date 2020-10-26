@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=4.0, user-scalable=yes">
+    <meta name="description" content="corona app">
+    <meta name="author" content="corona app">
+    <title>ESP_BLE_Server</title>
+    <style></style>
+  </head>
+  <body>
+    <button id='btn'>start</button> <span id=blevalue>characteristic</span> <button id='stp'>stop</button>
+  <pre id='info'>test bluetooth
+  </pre>
+  </body>
+    <script>
+    let mycharacteristic = null
+    ;
+    const
+        pri     = document.getElementById('info')
+      , btn     = document.getElementById('btn')
+      , stp     = document.getElementById('stp')
+      , bv      = document.getElementById('blevalue')
+      , suuid   = 0x181A  // Service UUID
+      , ctuuid  = 0x2A6E  // Characteristic UUID Temperature
+      , chuuid  = 0x2A6F  // Characteristic UUID Humidity
+      , cnotif  = e  => bv.innerHTML = e.target.value.getInt16(0,true)
+      , cstop   = () => if (mycharacteristic) mycharacteristic.stopNotifications()
+                                              .then(e=>mycharacteristic.removeEventListener('characteristicvaluechanged',cnotif);)
+                                              .catch(console.log)
+      , sb      = () => navigator.bluetooth.requestDevice( /*{ acceptAllDevices : true
+                                                           , optionalServices : ['battery_service']
+                                                         }*/
+                                                           { filters : [{ services : [ suuid ] }] }
+                                                          )
+                       .then ( device         => { pri.innerHTML+='\ndevice'         + device;  return device.gatt.connect       ()       })
+                       .then ( server         => { pri.innerHTML+='\nserver'         + server;  return server.getPrimaryService  (suuid ) })
+                       .then ( service        => { pri.innerHTML+='\nservice'        + service; return service.getCharacteristic (ctuuid) })
+                       .then ( characteristic => { pri.innerHTML+='\ncharacteristic' + characteristic;
+                                                    mycharacteristic = characteristic;
+                                                    return mycharacteristic
+                                                           .startNotifications()
+                                                           .then( e => mycharacteristic.addEventListener('characteristicvaluechanged',cnotif);)
+                                                 })
+                       .catch( error  => { pri.innerHTML+=error; })
+      ;
+
+   btn.addEventListener('click',sb);
+   stp.addEventListener('click',cstop);
+   pri.innerHTML+='\n navigator.bluetooth ' + navigator.bluetooth + ' navigator.mozBluetooth ' + navigator.mozBluetooth; //undefined
+
+
+    </script>
+  </html>
