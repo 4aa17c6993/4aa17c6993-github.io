@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=4.0, user-scalable=yes">
     <meta name="description" content="corona app">
     <meta name="author" content="corona app">
-    <title>ESP_BLE_Server</title>
+    <title>ESP_BLE_Server1</title>
     <style></style>
   </head>
   <body>
@@ -25,9 +25,9 @@
       , ctuuid  = 0x2A6E  // Characteristic UUID Temperature
       , chuuid  = 0x2A6F  // Characteristic UUID Humidity
       , cnotif  = e  => bv.innerHTML = e.target.value.getInt16(0,true)
-      , cstop   = () => if (mycharacteristic) mycharacteristic.stopNotifications()
-                                              .then(e=>mycharacteristic.removeEventListener('characteristicvaluechanged',cnotif);)
-                                              .catch(console.log)
+      , cstop   = () => {if (mycharacteristic) {mycharacteristic.stopNotifications()
+                                              .then(e=>mycharacteristic.removeEventListener('characteristicvaluechanged',cnotif))
+                                              .catch(console.log)}}
       , sb      = () => navigator.bluetooth.requestDevice( /*{ acceptAllDevices : true
                                                            , optionalServices : ['battery_service']
                                                          }*/
