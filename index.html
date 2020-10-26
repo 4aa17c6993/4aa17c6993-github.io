@@ -40,7 +40,7 @@
                                                     mycharacteristic = characteristic;
                                                     return mycharacteristic
                                                            .startNotifications()
-                                                           .then( e => mycharacteristic.addEventListener('characteristicvaluechanged',cnotif);)
+                                                           .then( e => mycharacteristic.addEventListener('characteristicvaluechanged',cnotif))
                                                  })
                        .catch( error  => { pri.innerHTML+=error; })
       ;
