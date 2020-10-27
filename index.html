@@ -21,9 +21,9 @@
       , btn     = document.getElementById('btn')
       , stp     = document.getElementById('stp')
       , bv      = document.getElementById('blevalue')
-      , suuid   = 0x181A  // Service UUID
-      , ctuuid  = 0x2A6E  // Characteristic UUID Temperature
-      , chuuid  = 0x2A6F  // Characteristic UUID Humidity
+      , suuid   = "0x181A"  // Service UUID
+      , ctuuid  = "0x2A6E"  // Characteristic UUID Temperature
+      , chuuid  = "0x2A6F"  // Characteristic UUID Humidity
       , cnotif  = e  => bv.innerHTML = e.target.value.getInt16(0,true)
       , cstop   = () => {if (mycharacteristic) {mycharacteristic.stopNotifications()
                                               .then(e=>mycharacteristic.removeEventListener('characteristicvaluechanged',cnotif))
