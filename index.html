@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=4.0, user-scalable=yes">
-    <meta name="description" content="corona app">
-    <meta name="author" content="corona app">
+    <meta name="description" content="me">
+    <meta name="author" content="me">
     <title>ESP_BLE_Server</title>
     <style></style>
   </head>
@@ -28,12 +28,12 @@
       , cstop   = () => {if (mycharacteristic) {mycharacteristic.stopNotifications()
                                               .then(e=>mycharacteristic.removeEventListener('characteristicvaluechanged',cnotif))
                                               .catch(console.log)}}
-      , sb      = () => navigator.bluetooth.requestDevice( /*{ acceptAllDevices : true
-                                                           , optionalServices : ['battery_service']
-                                                         }*/
-                                                           { filters : [{ services : [ suuid ] }] }
+      , sb      = () => navigator.bluetooth.requestDevice( { acceptAllDevices : true
+                                                           //, optionalServices : ['battery_service']
+                                                           }
+                                                          // { filters : [{ services : [ suuid ] }] }
                                                           )
-                       .then ( device         => { pri.innerHTML+='\ndevice'         + device;  return device.gatt.connect       ()       })
+                       .then ( device         => { pri.innerHTML+='\ndevice'         + device.name+' '+device.id;  return device.gatt.connect       ()       })
                        .then ( server         => { pri.innerHTML+='\nserver'         + server;  return server.getPrimaryService  (suuid ) })
                        .then ( service        => { pri.innerHTML+='\nservice'        + service; return service.getCharacteristic (ctuuid) })
                        .then ( characteristic => { pri.innerHTML+='\ncharacteristic' + characteristic;
