@@ -8,7 +8,7 @@
     <title>ESP_BLE_Server</title>
     <style></style>
   </head>
-  <body>lUI
+  <body>clUI
     <button id='btn'>start</button> <span id=blevalue>characteristic</span> <button id='stp'>stop</button>
   <pre id='info'>test bluetooth
   </pre>
@@ -21,9 +21,9 @@
       , btn     = document.getElementById('btn')
       , stp     = document.getElementById('stp')
       , bv      = document.getElementById('blevalue')
-      , suuid   = "0x181a"  // Service UUID
-      , ctuuid  = "0x2a6e"  // Characteristic UUID Temperature
-      , chuuid  = "0x2a6f"  // Characteristic UUID Humidity
+      , suuid   = 0x181a  // Service UUID
+      , ctuuid  = 0x2a6e  // Characteristic UUID Temperature
+      , chuuid  = 0x2a6f  // Characteristic UUID Humidity
       , cnotif  = e  => bv.innerHTML = e.target.value.getInt16(0,true)
       , cstop   = () => {if (mycharacteristic) {mycharacteristic.stopNotifications()
                                               .then(e=>mycharacteristic.removeEventListener('characteristicvaluechanged',cnotif))
