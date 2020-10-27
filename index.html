@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=4.0, user-scalable=yes">
     <meta name="description" content="me">
     <meta name="author" content="me">
-    <title>ESP_BLE_Server</title>
+    <title>ESP32_BLE</title>
     <style></style>
   </head>
   <body>
@@ -42,15 +42,14 @@
                                                     mycharacteristic = characteristic;
                                                     return mycharacteristic
                                                            .startNotifications()
-                                                           .then( e => mycharacteristic.addEventListener('characteristicvaluechanged',cnotif))
+                                                           .then( e => { pri.innerHTML+='\nNotificatons..';
+                                                                         mycharacteristic.addEventListener('characteristicvaluechanged',cnotif)
+                                                                       })
                                                  })
-                       .catch( error  => { pri.innerHTML+='\nERROR:'+error; })
+                       .catch( error  => { pri.innerHTML+='\nERROR:\n'+error; })
       ;
-
-   btn.addEventListener('click',sb);
-   stp.addEventListener('click',cstop);
-   pri.innerHTML+='\n navigator.bluetooth ' + navigator.bluetooth + ' navigator.mozBluetooth ' + navigator.mozBluetooth; //undefined
-
-
+      btn.addEventListener('click',sb);
+      stp.addEventListener('click',cstop);
+      pri.innerHTML+='\n navigator.bluetooth ' + navigator.bluetooth + '\n navigator.mozBluetooth ' + navigator.mozBluetooth; //undefined
     </script>
   </html>
