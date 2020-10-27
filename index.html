@@ -8,7 +8,7 @@
     <title>ESP_BLE_Server</title>
     <style></style>
   </head>
-  <body>eclUI
+  <body>xeclUI
     <button id='btn'>start</button> <span id=blevalue>characteristic</span> <button id='stp'>stop</button>
   <pre id='info'>test bluetooth
   </pre>
@@ -36,9 +36,9 @@
                                                            }
                                                           )
                        .then ( device         => { pri.innerHTML+='\ndevice'         + device.name+' '+device.id;  return device.gatt.connect       ()       })
-                       .then ( server         => { pri.innerHTML+='\nserver'         + server;  return server.getPrimaryService  (suuid ) })
-                       .then ( service        => { pri.innerHTML+='\nservice'        + service; return service.getCharacteristic (ctuuid) })
-                       .then ( characteristic => { pri.innerHTML+='\ncharacteristic' + characteristic;
+                       .then ( server         => { pri.innerHTML+='\nserver'         ;  return server.getPrimaryService  (suuid ) })
+                       .then ( service        => { pri.innerHTML+='\nservice'        ; return service.getCharacteristic (ctuuid) })
+                       .then ( characteristic => { pri.innerHTML+='\ncharacteristic' + characteristic.uid + ' R:' + characteristic.properties.read+ ' N:' + characteristic.properties.notify;
                                                     mycharacteristic = characteristic;
                                                     return mycharacteristic
                                                            .startNotifications()
