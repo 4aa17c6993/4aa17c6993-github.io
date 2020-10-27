@@ -38,7 +38,7 @@
                        .then ( device         => { pri.innerHTML+='\ndevice'         + device.name+' '+device.id;  return device.gatt.connect       ()       })
                        .then ( server         => { pri.innerHTML+='\nserver'         ;  return server.getPrimaryService  (suuid ) })
                        .then ( service        => { pri.innerHTML+='\nservice'        ; return service.getCharacteristic (ctuuid) })
-                       .then ( characteristic => { pri.innerHTML+='\ncharacteristic' + characteristic.uid + ' R:' + characteristic.properties.read+ ' N:' + characteristic.properties.notify;
+                       .then ( characteristic => { pri.innerHTML+='\ncharacteristic' + characteristic.uuid + ' R:' + characteristic.properties.read+ ' N:' + characteristic.properties.notify;
                                                     mycharacteristic = characteristic;
                                                     return mycharacteristic
                                                            .startNotifications()
