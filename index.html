@@ -28,10 +28,10 @@
       , cstop   = () => {if (mycharacteristic) {mycharacteristic.stopNotifications()
                                               .then(e=>mycharacteristic.removeEventListener('characteristicvaluechanged',cnotif))
                                               .catch(console.log)}}
-      , sb      = () => navigator.bluetooth.requestDevice( { acceptAllDevices : true
+      , sb      = () => navigator.bluetooth.requestDevice( //{ acceptAllDevices : true
                                                            //, optionalServices : ['battery_service']
-                                                           }
-                                                          // { filters : [{ services : [ suuid ] }] }
+                                                           //}
+                                                           { "filters" : [{ "namePrefix" : "Ste" }] }
                                                           )
                        .then ( device         => { pri.innerHTML+='\ndevice'         + device.name+' '+device.id;  return device.gatt.connect       ()       })
                        .then ( server         => { pri.innerHTML+='\nserver'         + server;  return server.getPrimaryService  (suuid ) })
