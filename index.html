@@ -8,7 +8,7 @@
     <title>ESP_BLE_Server</title>
     <style></style>
   </head>
-  <body>clUI
+  <body>eclUI
     <button id='btn'>start</button> <span id=blevalue>characteristic</span> <button id='stp'>stop</button>
   <pre id='info'>test bluetooth
   </pre>
@@ -31,7 +31,9 @@
       , sb      = () => navigator.bluetooth.requestDevice( //{ acceptAllDevices : true
                                                            //, optionalServices : ['battery_service']
                                                            //}
-                                                           { "filters" : [{ "namePrefix" : "Ste" }] }
+                                                           { "filters"           : [{ "namePrefix" : "Ste" }] 
+                                                           , "optionalServices"  : ["environmental_sensing"]
+                                                           }
                                                           )
                        .then ( device         => { pri.innerHTML+='\ndevice'         + device.name+' '+device.id;  return device.gatt.connect       ()       })
                        .then ( server         => { pri.innerHTML+='\nserver'         + server;  return server.getPrimaryService  (suuid ) })
